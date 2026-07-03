@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShieldVPN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- ── Header ──────────────────────────────────────────────────────── -->
+  <header class="header">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" fill="currentColor" opacity=".15" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <span class="brand-name">ShieldVPN</span>
+        <span class="plan-badge" id="planBadge">FREE</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="earn-btn" id="btnEarn" title="Earn Money">
+        <span class="earn-dot"></span>💰 Earn
+      </button>
+      <button class="icon-btn" id="btnSettings" title="Settings">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" stroke="currentColor" stroke-width="1.8"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ══════════════════ MAIN VIEW ══════════════════ -->
+  <div class="view" id="viewMain">
+
+    <!-- Connection Orb -->
+    <div class="orb-section">
+      <div class="orb-rings" id="orbRings">
+        <div class="ring ring-1"></div>
+        <div class="ring ring-2"></div>
+        <div class="ring ring-3"></div>
+      </div>
+      <button class="orb" id="orbBtn" aria-label="Connect/Disconnect">
+        <div class="orb-inner">
+          <svg class="orb-icon" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" fill="currentColor" opacity=".2" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </button>
+      <div class="orb-status" id="orbStatus">Tap to connect</div>
+      <div class="orb-label" id="orbLabel">Not protected</div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-up"><svg viewBox="0 0 24 24" fill="none"><polyline points="18,15 12,9 6,15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div><div class="stat-val" id="statUp">0 KB</div><div class="stat-key">Upload</div></div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-down"><svg viewBox="0 0 24 24" fill="none"><polyline points="6,9 12,15 18,9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div><div class="stat-val" id="statDown">0 KB</div><div class="stat-key">Download</div></div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-time"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><polyline points="12,7 12,12 15,15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div><div class="stat-val" id="statTime">00:00</div><div class="stat-key">Duration</div></div>
+      </div>
+    </div>
+
+    <!-- IP Card -->
+    <div class="ip-card" id="ipCard">
+      <div class="ip-left">
+        <div class="ip-label">Your IP Address</div>
+        <div class="ip-value" id="ipValue">Checking…</div>
+      </div>
+      <div class="ip-badge" id="ipBadge"><span id="ipBadgeText">Exposed</span></div>
+    </div>
+
+    <!-- Server Selector -->
+    <div class="section-label">Server Location</div>
+    <button class="server-selector" id="serverSelector">
+      <div class="server-flag" id="selectorFlag">🇺🇸</div>
+      <div class="server-info">
+        <div class="server-name" id="selectorName">United States</div>
+        <div class="server-city" id="selectorCity">Cloudflare WARP</div>
+      </div>
+      <div class="tier-chip" id="selectorTier">FREE</div>
+      <div class="server-ping"><span class="ping-dot"></span><span id="pingVal">18ms</span></div>
+      <svg class="chevron" viewBox="0 0 24 24" fill="none"><polyline points="9,18 15,12 9,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <!-- Toggles -->
+    <div class="toggles-row">
+      <div class="toggle-item">
+        <div><div class="toggle-title">Kill Switch</div><div class="toggle-sub">Block traffic if VPN drops</div></div>
+        <button class="toggle-btn" id="toggleKillSwitch" role="switch" aria-checked="false"><span class="toggle-thumb"></span></button>
+      </div>
+      <div class="toggle-item">
+        <div><div class="toggle-title">Auto-Connect</div><div class="toggle-sub">Connect on browser start</div></div>
+        <button class="toggle-btn" id="toggleAutoConnect" role="switch" aria-checked="false"><span class="toggle-thumb"></span></button>
+      </div>
+    </div>
+
+    <!-- Promo Banner -->
+    <div class="promo-banner" id="promoBanner">
+      <div class="promo-left">
+        <div class="promo-icon">💰</div>
+        <div>
+          <div class="promo-title">Earn with Affiliates</div>
+          <div class="promo-sub">Up to $36 per referral — NordVPN, Surfshark</div>
+        </div>
+      </div>
+      <button class="promo-cta" id="promoCtaBtn">View</button>
+    </div>
+
+  </div><!-- /viewMain -->
+
+  <!-- ══════════════════ SERVER LIST VIEW ══════════════════ -->
+  <div class="view hidden" id="viewServers">
+    <div class="view-header">
+      <button class="back-btn" id="btnBackFromServers">
+        <svg viewBox="0 0 24 24" fill="none"><polyline points="15,18 9,12 15,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <h2 class="view-title">Select Server</h2>
+    </div>
+
+    <!-- Tier Tabs -->
+    <div class="tier-tabs">
+      <button class="tier-tab active" id="tabFree" data-tab="free">
+        🆓 Free
+        <span class="tab-count" id="tabFreeCount">3</span>
+      </button>
+      <button class="tier-tab" id="tabPaid" data-tab="paid">
+        ⭐ Premium
+        <span class="tab-count" id="tabPaidCount">10</span>
+      </button>
+      <button class="tier-tab" id="tabLive" data-tab="live">
+        🌐 Live
+        <span class="tab-count" id="tabLiveCount">0</span>
+      </button>
+    </div>
+
+    <!-- Free tab hint -->
+    <div class="tab-hint" id="hintFree">
+      <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 8v4m0 4h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      WARP &amp; Tor need their apps running locally. Live proxies are public and free.
+    </div>
+    <div class="tab-hint hidden" id="hintPaid">
+      <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 8v4m0 4h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      Configure your own VPN/proxy credentials in Settings ⚙️.
+    </div>
+    <div class="tab-hint hidden" id="hintLive">
+      <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 8v4m0 4h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span id="hintLiveText">Fetching live free proxies…</span>
+      <button class="refresh-btn" id="btnRefreshProxies">↻ Refresh</button>
+    </div>
+
+    <div class="search-bar">
+      <svg viewBox="0 0 24 24" fill="none" class="search-icon"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.8"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" id="serverSearch" placeholder="Search servers…" />
+    </div>
+
+    <div class="server-list" id="serverList"></div>
+  </div><!-- /viewServers -->
+
+  <!-- ══════════════════ SETTINGS VIEW ══════════════════ -->
+  <div class="view hidden" id="viewSettings">
+    <div class="view-header">
+      <button class="back-btn" id="btnBackFromSettings">
+        <svg viewBox="0 0 24 24" fill="none"><polyline points="15,18 9,12 15,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <h2 class="view-title">Server Config</h2>
+    </div>
+
+    <!-- Settings Tier Tabs -->
+    <div class="tier-tabs" style="margin-top:12px">
+      <button class="tier-tab active" id="cfgTabFree" data-cfg="free">🆓 Free Setup</button>
+      <button class="tier-tab" id="cfgTabPaid" data-cfg="paid">⭐ Premium Setup</button>
+    </div>
+
+    <!-- Free Setup Panel -->
+    <div class="settings-body" id="cfgPanelFree">
+      <p class="settings-note">
+        <strong>Option A — Cloudflare WARP (Recommended)</strong><br>
+        1. Download <a href="https://1.1.1.1" target="_blank" class="note-link">1.1.1.1 WARP app</a><br>
+        2. Connect WARP<br>
+        3. Select "WARP" server in the list → Connect
+      </p>
+      <p class="settings-note" style="margin-top:10px">
+        <strong>Option B — Tor Browser</strong><br>
+        1. Download &amp; open <a href="https://www.torproject.org" target="_blank" class="note-link">Tor Browser</a><br>
+        2. Let it connect to the Tor network<br>
+        3. Select "Tor Network" server → Connect
+      </p>
+      <p class="settings-note" style="margin-top:10px">
+        <strong>Option C — Live Free Proxies</strong><br>
+        Go to the "🌐 Live" tab in the server list. We automatically fetch fresh free SOCKS5 proxies for you.
+      </p>
+    </div>
+
+    <!-- Paid Setup Panel -->
+    <div class="settings-body hidden" id="cfgPanelPaid">
+      <p class="settings-note">Enter your VPN/proxy server credentials from your paid provider (NordVPN, Surfshark, ExpressVPN, etc.).</p>
+      <div class="field-group">
+        <label class="field-label">Select Server to Configure</label>
+        <select class="field-input" id="configServer"></select>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Proxy Host / IP</label>
+        <input class="field-input" type="text" id="configHost" placeholder="e.g. us1234.nordvpn.com" />
+      </div>
+      <div class="field-row">
+        <div class="field-group field-half">
+          <label class="field-label">Port</label>
+          <input class="field-input" type="number" id="configPort" placeholder="1080" min="1" max="65535" />
+        </div>
+        <div class="field-group field-half">
+          <label class="field-label">Protocol</label>
+          <select class="field-input" id="configType">
+            <option value="socks5">SOCKS5</option>
+            <option value="socks4">SOCKS4</option>
+            <option value="https">HTTPS</option>
+            <option value="http">HTTP</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-save" id="btnSaveConfig">Save Configuration</button>
+      <div class="save-msg hidden" id="saveMsg">✓ Saved successfully</div>
+    </div>
+  </div><!-- /viewSettings -->
+
+  <!-- ══════════════════ AFFILIATE VIEW ══════════════════ -->
+  <div class="view hidden" id="viewAffiliate">
+    <div class="view-header">
+      <button class="back-btn" id="btnBackFromAffiliate">
+        <svg viewBox="0 0 24 24" fill="none"><polyline points="15,18 9,12 15,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <h2 class="view-title">💰 Earn with Affiliates</h2>
+    </div>
+    <div class="aff-intro">
+      <p>Recommend VPNs and earn <strong>up to $36 per signup</strong>. Replace <code>YOUR_ID</code> in popup.html with your affiliate ID.</p>
+    </div>
+    <div class="aff-list">
+
+      <!-- NordVPN -->
+      <div class="aff-card">
+        <div class="aff-badge aff-badge-top">⭐ Best Overall</div>
+        <div class="aff-card-header">
+          <div class="aff-logo aff-logo-nord">N</div>
+          <div class="aff-info"><div class="aff-name">NordVPN</div><div class="aff-stars">★★★★★ <span>4.9/5</span></div></div>
+          <div class="aff-commission"><div class="aff-earn">$3–$40</div><div class="aff-earn-label">per sale</div></div>
+        </div>
+        <div class="aff-features">
+          <span class="aff-tag">5400+ servers</span><span class="aff-tag">69% OFF</span><span class="aff-tag">30-day refund</span>
+        </div>
+        <div class="aff-price-row">
+          <div class="aff-price">From <strong>$3.09</strong><span>/mo</span></div>
+          <div class="aff-discount">Save 69%</div>
+        </div>
+        <a class="aff-btn aff-btn-nord" id="linkNord" href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOUR_ID" target="_blank">Get NordVPN Deal →</a>
+      </div>
+
+      <!-- Surfshark -->
+      <div class="aff-card">
+        <div class="aff-badge aff-badge-value">💸 Best Value</div>
+        <div class="aff-card-header">
+          <div class="aff-logo aff-logo-surf">S</div>
+          <div class="aff-info"><div class="aff-name">Surfshark</div><div class="aff-stars">★★★★★ <span>4.8/5</span></div></div>
+          <div class="aff-commission"><div class="aff-earn">40%</div><div class="aff-earn-label">commission</div></div>
+        </div>
+        <div class="aff-features">
+          <span class="aff-tag">Unlimited devices</span><span class="aff-tag">80% OFF</span><span class="aff-tag">CleanWeb</span>
+        </div>
+        <div class="aff-price-row">
+          <div class="aff-price">From <strong>$2.21</strong><span>/mo</span></div>
+          <div class="aff-discount">Save 80%</div>
+        </div>
+        <a class="aff-btn aff-btn-surf" id="linkSurf" href="https://get.surfshark.net/aff_c?offer_id=926&aff_id=YOUR_ID" target="_blank">Get Surfshark Deal →</a>
+      </div>
+
+      <!-- ExpressVPN -->
+      <div class="aff-card">
+        <div class="aff-badge aff-badge-fast">⚡ Fastest</div>
+        <div class="aff-card-header">
+          <div class="aff-logo aff-logo-express">E</div>
+          <div class="aff-info"><div class="aff-name">ExpressVPN</div><div class="aff-stars">★★★★★ <span>4.8/5</span></div></div>
+          <div class="aff-commission"><div class="aff-earn">$36</div><div class="aff-earn-label">flat rate</div></div>
+        </div>
+        <div class="aff-features">
+          <span class="aff-tag">160 countries</span><span class="aff-tag">3 months FREE</span><span class="aff-tag">Lightway VPN</span>
+        </div>
+        <div class="aff-price-row">
+          <div class="aff-price">From <strong>$6.67</strong><span>/mo</span></div>
+          <div class="aff-discount">+3 months free</div>
+        </div>
+        <a class="aff-btn aff-btn-express" id="linkExpress" href="https://www.expressrefer.com/refer-a-friend/30-days-free?referrer_id=YOUR_ID" target="_blank">Get ExpressVPN Deal →</a>
+      </div>
+
+    </div>
+    <div class="aff-footer">
+      <div class="aff-footer-title">🔗 How to activate</div>
+      <div class="aff-footer-steps">
+        <div class="aff-step"><span class="step-num">1</span> Sign up on each VPN's affiliate program</div>
+        <div class="aff-step"><span class="step-num">2</span> Replace <code>YOUR_ID</code> in popup.html</div>
+        <div class="aff-step"><span class="step-num">3</span> Users click → you earn per conversion</div>
+      </div>
+    </div>
+  </div><!-- /viewAffiliate -->
+
+</div><!-- /app -->
+<script src="popup.js"></script>
+</body>
+</html>
